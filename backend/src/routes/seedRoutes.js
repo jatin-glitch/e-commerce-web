@@ -11,7 +11,7 @@ const sampleProducts = [
     stock: 24,
   },
   {
-    name: "Apple AirPods Pro Wireless Earbuds",
+    name: "Earphones",
     description:
       "Premium true wireless earbuds with active noise cancellation, 24-hour battery life with charging case, and superior sound quality.",
     price: 14999,
@@ -35,7 +35,7 @@ const sampleProducts = [
     stock: 15,
   },
   {
-    name: "Anker PowerCore 20000mAh Portable Charger",
+    name: "Earbuds",
     description:
       "High-capacity power bank with USB-C PD fast charging, dual outputs, LED battery indicator, and compact design for travel.",
     price: 5599,
@@ -55,32 +55,8 @@ const sampleProducts = [
     description:
       "Stylish smart glasses with built-in cameras, open-ear speakers, touch controls, and smartphone integration for hands-free use.",
     price: 45999,
-    imageUrl: "/Images/earphone.jpeg",
+    imageUrl: "/Images/earbuds.jpeg",
     stock: 20,
-  },
-  {
-    name: "SwissGear Laptop Backpack 1900",
-    description:
-      "Water-resistant laptop backpack with dedicated compartments, USB charging port, anti-theft design, and TSA-friendly layout.",
-    price: 7999,
-    imageUrl: "/Images/headphone1.jpeg",
-    stock: 45,
-  },
-  {
-    name: "Belkin BoostCharge Wireless Charging Pad",
-    description:
-      "Fast wireless charging pad compatible with all Qi-enabled devices, LED indicator, overheating protection, and 10W fast charging.",
-    price: 3999,
-    imageUrl: "/Images/smartwatch.jpeg",
-    stock: 60,
-  },
-  {
-    name: "JBL Flip 6 Portable Bluetooth Speaker",
-    description:
-      "Waterproof portable speaker with 360-degree sound, 12-hour battery life, built-in power bank, and rugged design for outdoor use.",
-    price: 8999,
-    imageUrl: "/Images/camera.jpeg",
-    stock: 55,
   },
 ];
 
