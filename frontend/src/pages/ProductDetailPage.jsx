@@ -9,7 +9,7 @@ export default function ProductDetailPage() {
   const [product, setProduct] = useState(null);
   const [loading, setLoading] = useState(true);
   const [quantity, setQuantity] = useState(1);
-  const [showSuccess, setShowSuccess] = useState(false);
+  const [buttonText, setButtonText] = useState('Add to cart');
   const { addToCart } = useCart();
   const { user } = useAuth();
   const navigate = useNavigate();
@@ -20,8 +20,8 @@ export default function ProductDetailPage() {
       return;
     }
     addToCart(product, quantity);
-    setShowSuccess(true);
-    setTimeout(() => setShowSuccess(false), 3000);
+    setButtonText('Added!');
+    setTimeout(() => setButtonText('Add to cart'), 3000);
   };
 
   useEffect(() => {
@@ -48,23 +48,6 @@ export default function ProductDetailPage() {
 
   return (
     <div className="section">
-      {showSuccess && (
-        <div className="success-message" style={{
-          position: 'fixed',
-          top: '20px',
-          right: '20px',
-          backgroundColor: '#28a745',
-          color: 'white',
-          padding: '12px 20px',
-          borderRadius: '8px',
-          boxShadow: '0 4px 12px rgba(0,0,0,0.15)',
-          zIndex: 1000,
-          fontSize: '14px',
-          fontWeight: '500'
-        }}>
-          ✓ Added to cart successfully!
-        </div>
-      )}
       <div className="stack-h" style={{ gap: '2rem', flexWrap: 'wrap' }}>
         <div style={{ flex: '1 1 260px' }}>
           <div className="product-image" style={{ minHeight: '320px' }}>
@@ -128,7 +111,7 @@ export default function ProductDetailPage() {
               }
               disabled={product.stock === 0}
             >
-              {product.stock === 0 ? 'Out of stock' : 'Add to cart'}
+              {product.stock === 0 ? 'Out of stock' : buttonText}
             </button>
           </div>
         </div>
