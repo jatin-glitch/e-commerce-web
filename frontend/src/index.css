@@ -1452,17 +1452,19 @@ img {
   
   .hamburger-btn {
     display: block;
-    position: absolute;
-    top: 1rem;
-    right: 1rem;
+    position: relative;
+    top: 0;
+    right: auto;
+    left: 0;
+    margin: 0;
+    z-index: 1001;
     background: rgba(16, 185, 129, 0.8);
     border: 1px solid rgba(255, 255, 255, 0.4);
     border-radius: 0.5rem;
     padding: 0.5rem 1rem;
     color: white;
     font-size: 0.9rem;
-    cursor: pointer;
-    z-index: 1001;
+    min-height: 44px; /* iOS touch target minimum */
   }
   
   .mobile-nav-menu {
@@ -1573,10 +1575,10 @@ img {
 /* Move mobile menu button to right corner in mobile view */
 @media (max-width: 600px) {
   .hamburger-btn {
-    position: fixed;
-    top: 1rem;
-    right: 1rem;
-    left: auto;
+    position: relative;
+    top: 0;
+    right: auto;
+    left: 0;
     margin: 0;
     z-index: 1001;
     width: 40px;
