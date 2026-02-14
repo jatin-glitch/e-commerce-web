@@ -38,8 +38,8 @@ export default function Layout({ children }) {
       <header className="app-header">
         <div className="container header-inner">
           <Link to="/" className="brand">
-            <span className="brand-mark">Shop</span>
-            <span className="brand-sub">E‑Commerce</span>
+            <span className="brand-mark">E-Commerce</span>
+            <span className="brand-sub">Web</span>
           </Link>
           
           {/* Mobile menu toggle */}
@@ -173,7 +173,7 @@ export default function Layout({ children }) {
 
       <footer className="app-footer">
         <div className="container footer-inner">
-          <span>Modern E‑commerce Demo</span>
+          <span>E-Commerce-Web</span>
           <span>COD & Mock JazzCash checkout</span>
         </div>
       </footer>
