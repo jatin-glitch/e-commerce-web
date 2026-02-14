@@ -1269,12 +1269,17 @@ img {
 
   .category-dropdown {
     position: fixed;
-    top: auto;
+    top: 60px; /* Position below header */
     right: 0;
     left: 0;
-    margin: 1rem 0;
-    width: calc(100% - 1rem);
+    margin: 0;
+    width: 100%;
     max-width: none;
+    z-index: 1000;
+    background: white;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+    max-height: calc(100vh - 60px);
+    overflow-y: auto;
   }
 
   .category-item {
@@ -1568,7 +1573,7 @@ img {
 /* Move mobile menu button to right corner in mobile view */
 @media (max-width: 600px) {
   .mobile-nav-toggle {
-    position: absolute;
+    position: fixed;
     top: 1rem;
     right: 1rem;
     left: auto;
@@ -1578,11 +1583,15 @@ img {
   
   .mobile-nav-menu {
     position: fixed;
-    top: 80px; /* Position below header */
+    top: 60px; /* Position below header */
     left: 0;
     right: 0;
     margin: 0;
     width: 100%;
-    z-index: 999;
+    z-index: 1000;
+    background: white;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+    max-height: calc(100vh - 60px);
+    overflow-y: auto;
   }
 }
