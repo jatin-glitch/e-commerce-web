@@ -55,7 +55,7 @@ const sampleProducts = [
     description:
       "Stylish smart glasses with built-in cameras, open-ear speakers, touch controls, and smartphone integration for hands-free use.",
     price: 45999,
-    imageUrl: "/Images/metaglasses.avif",
+    imageUrl: "/Images/camera.jpeg",
     stock: 20,
   },
 ];
