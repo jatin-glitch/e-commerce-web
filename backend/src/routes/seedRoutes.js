@@ -51,7 +51,7 @@ const sampleProducts = [
     stock: 30,
   },
   {
-    name: "Meta Ray-Ban Smart Glasses",
+    name: "meta.jpeg",
     description:
       "Stylish smart glasses with built-in cameras, open-ear speakers, touch controls, and smartphone integration for hands-free use.",
     price: 45999,
