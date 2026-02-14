@@ -9,7 +9,7 @@ import productRoutes from "./routes/productRoutes.js";
 import orderRoutes from "./routes/orderRoutes.js";
 import paymentRoutes from "./routes/paymentRoutes.js";
 import imageRoutes from "./routes/imageRoutes.js";
-import { seedProducts } from "./routes/seedRoutes.js";
+import { seedProducts, clearAndSeedProducts } from "./routes/seedRoutes.js";
 
 dotenv.config();
 
@@ -36,6 +36,7 @@ app.get("/api/health", (_req, res) => {
 });
 
 app.post("/api/seed", seedProducts);
+app.post("/api/clear-and-seed", clearAndSeedProducts);
 
 app.use("/api/auth", authRoutes);
 app.use("/api/products", productRoutes);
