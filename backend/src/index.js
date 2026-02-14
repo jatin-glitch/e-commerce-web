@@ -19,7 +19,11 @@ const CLIENT_URL = process.env.CLIENT_URL || "http://localhost:5173";
 
 app.use(
   cors({
-    origin: CLIENT_URL,
+    origin: [
+      CLIENT_URL,
+      'https://e-commerce-web-eight-gamma.vercel.app',
+      'https://e-commerce-web-production-f0f4.up.railway.app'
+    ],
     credentials: true,
   }),
 );
