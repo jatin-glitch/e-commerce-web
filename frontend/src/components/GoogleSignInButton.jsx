@@ -3,7 +3,7 @@ import { useEffect } from 'react';
 export default function GoogleSignInButton({ text = 'Sign in with Google' }) {
   const handleGoogleSignIn = () => {
     const baseUrl = import.meta.env.VITE_API_URL || 'http://localhost:5000';
-    window.location.href = `${baseUrl}/api/auth/google`;
+    window.location.href = `${baseUrl}/auth/google`;
   };
 
   useEffect(() => {
