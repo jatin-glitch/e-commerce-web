@@ -6,7 +6,7 @@ const api = axios.create({
 });
 
 // Create a separate instance for image URLs
-export const imageBaseUrl = 'http://localhost:5000';
+export const imageBaseUrl = import.meta.env.VITE_IMAGE_BASE_URL || 'http://localhost:5000';
 
 export default api;
 
