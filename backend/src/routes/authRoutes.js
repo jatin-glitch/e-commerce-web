@@ -120,7 +120,10 @@ router.get("/google", passport.authenticate("google", { scope: ["profile", "emai
 
 router.get(
   "/google/callback",
-  passport.authenticate("google", { failureRedirect: `${process.env.CLIENT_URL}/login?error=google_auth_failed` }),
+  passport.authenticate("google", { 
+    session: false,
+    failureRedirect: `${process.env.CLIENT_URL}/login?error=google_auth_failed` 
+  }),
   (req, res) => {
     const token = createToken(req.user._id, req.user.role);
     setAuthCookie(res, token);
