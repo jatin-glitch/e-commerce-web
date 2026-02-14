@@ -14,6 +14,8 @@ import ReviewsPage from './pages/ReviewsPage.jsx';
 import AdminProductsPage from './pages/admin/AdminProductsPage.jsx';
 import AdminOrdersPage from './pages/admin/AdminOrdersPage.jsx';
 
+// Trigger Vercel redeploy - fix auth/success route
+
 function PrivateRoute({ children }) {
   const { user, loading } = useAuth();
   if (loading) return <div className="centered-page">Loading...</div>;
