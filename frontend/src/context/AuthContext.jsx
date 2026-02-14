@@ -15,10 +15,24 @@ export function AuthProvider({ children }) {
   useEffect(() => {
     const fetchMe = async () => {
       try {
+        // First check if user data exists in localStorage (from Google OAuth)
+        const storedUser = localStorage.getItem('user');
+        if (storedUser) {
+          const parsedUser = JSON.parse(storedUser);
+          setUser(parsedUser);
+          setLoading(false);
+          return;
+        }
+
+        // If no stored user, fetch from API
         const res = await api.get('/auth/me');
-        setUser(res.data.user);
+        if (res.data.user) {
+          setUser(res.data.user);
+          localStorage.setItem('user', JSON.stringify(res.data.user));
+        }
       } catch {
         setUser(null);
+        localStorage.removeItem('user');
       } finally {
         setLoading(false);
       }
@@ -28,17 +42,22 @@ export function AuthProvider({ children }) {
 
   const login = async (email, password) => {
     const res = await api.post('/auth/login', { email, password });
-    setUser(res.data.user);
+    const userData = res.data.user;
+    setUser(userData);
+    localStorage.setItem('user', JSON.stringify(userData));
   };
 
   const register = async (payload) => {
     const res = await api.post('/auth/register', payload);
-    setUser(res.data.user);
+    const userData = res.data.user;
+    setUser(userData);
+    localStorage.setItem('user', JSON.stringify(userData));
   };
 
   const logout = async () => {
     await api.post('/auth/logout');
     setUser(null);
+    localStorage.removeItem('user');
   };
 
   return (
