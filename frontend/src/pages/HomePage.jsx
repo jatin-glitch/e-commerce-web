@@ -11,6 +11,8 @@ export default function HomePage() {
   const [error, setError] = useState('');
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [activeCategory, setActiveCategory] = useState('all');
+  const [showHamburger, setShowHamburger] = useState(false);
+  const [lastScrollY, setLastScrollY] = useState(0);
   const { addToCart } = useCart();
   const { user } = useAuth();
   const navigate = useNavigate();
@@ -47,6 +49,51 @@ export default function HomePage() {
       behavior: 'smooth'
     });
   };
+
+  // Get nearby products based on current product categories
+  const getNearbyProducts = () => {
+    if (filteredProducts.length === 0) return [];
+    
+    // Get unique categories from current filtered products
+    const categories = [...new Set(filteredProducts.map(p => 
+      p.name.toLowerCase().split(' ')[0] // Simple categorization by first word
+    ))];
+    
+    // Find products that match these categories but aren't in current view
+    const nearby = products.filter(p => {
+      const productCategory = p.name.toLowerCase().split(' ')[0];
+      return categories.includes(productCategory) && 
+             !filteredProducts.some(fp => fp._id === p._id);
+    });
+    
+    return nearby.slice(0, 4); // Limit to 4 nearby products
+  };
+
+  const nearbyProducts = getNearbyProducts();
+
+  // Handle scroll behavior for hamburger menu
+  useEffect(() => {
+    const handleResize = () => {
+      // Always hide hamburger menu
+      setShowHamburger(false);
+      setMobileMenuOpen(false);
+    };
+
+    const handleScroll = () => {
+      setLastScrollY(window.scrollY);
+    };
+
+    // Initial check
+    handleResize();
+    
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    window.addEventListener('resize', handleResize, { passive: true });
+    
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+      window.removeEventListener('resize', handleResize);
+    };
+  }, [lastScrollY]);
 
   useEffect(() => {
     const load = async () => {
@@ -90,37 +137,6 @@ export default function HomePage() {
             <span className="checkout-text">COD & Mock JazzCash checkout</span>
           </div>
         </div>
-        <div className="hero-card">
-          <div className="stack-v">
-            <div className="stack-h-between">
-              <div>
-                <div className="muted text-sm">Today&apos;s summary</div>
-                <div className="hero-stat-number">End‑to‑end demo flow</div>
-              </div>
-              <div className="badge-soft">Sandbox</div>
-            </div>
-            <div className="hero-stat-row">
-              <div className="hero-stat">
-                <span className="hero-stat-number">Auth</span>
-                <span className="hero-stat-label">
-                  Signup, login, logout, roles
-                </span>
-              </div>
-              <div className="hero-stat">
-                <span className="hero-stat-number">Storefront</span>
-                <span className="hero-stat-label">
-                  Products, cart & checkout
-                </span>
-              </div>
-              <div className="hero-stat">
-                <span className="hero-stat-number">Payments</span>
-                <span className="hero-stat-label">
-                  COD + JazzCash‑style mock
-                </span>
-              </div>
-            </div>
-          </div>
-        </div>
       </section>
 
       <section className="section" id="products-section">
@@ -152,7 +168,7 @@ export default function HomePage() {
           </div>
           <div className="category-menu">
             <button 
-              className="hamburger-btn" 
+              className={`hamburger-btn ${!showHamburger ? 'hidden' : ''}`}
               onClick={toggleMobileMenu}
               aria-label="Category menu"
             >
@@ -279,6 +295,75 @@ export default function HomePage() {
           </div>
         )}
       </section>
+
+      {/* Nearby Products Section */}
+      {nearbyProducts.length > 0 && (
+        <section className="section">
+          <div>
+            <h2 className="page-title">Nearby Products</h2>
+            <p className="page-subtitle">
+              Similar items you might like based on your current selection
+            </p>
+            <div className="grid-products">
+              {nearbyProducts.map((p) => (
+                <article key={p._id} className="product-card nearby-product">
+                  <Link to={`/product/${p._id}`} className="product-image">
+                    {p.imageUrl ? (
+                      <img
+                        src={p.imageUrl.startsWith('/Images') ? `${imageBaseUrl}${p.imageUrl}` : p.imageUrl}
+                        alt={p.name}
+                        style={{ borderRadius: '0.6rem', objectFit: 'cover' }}
+                      />
+                    ) : (
+                      <div className="stack-v">
+                        <span className="pill">
+                          PKR {p.price?.toLocaleString() ?? p.price}
+                        </span>
+                        <span className="muted text-sm">
+                          Tap to view details &gt;
+                        </span>
+                      </div>
+                    )}
+                  </Link>
+                  <div className="card-header-row">
+                    <h3 className="product-name">{p.name}</h3>
+                    <span className="muted text-sm">
+                      {p.stock > 0 ? 'In stock' : 'Out of stock'}
+                    </span>
+                  </div>
+                  <p className="product-description">
+                    {p.description?.slice(0, 90) ?? ''}
+                    {p.description && p.description.length > 90 ? '…' : ''}
+                  </p>
+                  <div className="stack-h-between mt-1">
+                    <span className="product-price">
+                      PKR {p.price?.toLocaleString() ?? p.price}
+                    </span>
+                    <button
+                      type="button"
+                      className="btn btn-secondary"
+                      onClick={() =>
+                        handleAddToCart(
+                          {
+                            id: p._id,
+                            name: p.name,
+                            price: p.price,
+                            imageUrl: p.imageUrl,
+                          },
+                          1,
+                        )
+                      }
+                      disabled={p.stock === 0}
+                    >
+                      {p.stock === 0 ? 'Out of stock' : 'Add to cart'}
+                    </button>
+                  </div>
+                </article>
+              ))}
+            </div>
+          </div>
+        </section>
+      )}
 
       {/* Trust Badges Section */}
       <section className="trust-section">
