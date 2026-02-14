@@ -9,6 +9,7 @@ import productRoutes from "./routes/productRoutes.js";
 import orderRoutes from "./routes/orderRoutes.js";
 import paymentRoutes from "./routes/paymentRoutes.js";
 import imageRoutes from "./routes/imageRoutes.js";
+import { seedProducts } from "./routes/seedRoutes.js";
 
 dotenv.config();
 
@@ -33,6 +34,8 @@ app.use(cookieParser());
 app.get("/api/health", (_req, res) => {
   res.json({ status: "ok" });
 });
+
+app.post("/api/seed", seedProducts);
 
 app.use("/api/auth", authRoutes);
 app.use("/api/products", productRoutes);
