@@ -39,7 +39,7 @@ const sampleProducts = [
     description:
       "High‑capacity power bank with USB‑C PD fast charging, dual outputs and LED battery indicator.",
     price: 5599,
-    imageUrl: "/Images/powerbank.jpeg",
+    imageUrl: "/Images/earbuds.jpeg",
     stock: 50,
   },
   {
@@ -47,7 +47,7 @@ const sampleProducts = [
     description:
       "Professional gaming headset with 7.1 surround sound, RGB lighting, and 20-hour battery life for extended gaming sessions.",
     price: 12999,
-    imageUrl: "/Images/headphone2.jpeg",
+    imageUrl: "/Images/headophone2.jpeg",
     stock: 30,
   },
   {
@@ -79,7 +79,7 @@ const sampleProducts = [
     description:
       "Waterproof portable speaker with 360-degree sound, 24-hour battery life, and built-in power bank functionality.",
     price: 8999,
-    imageUrl: "/Images/powerbank.jpeg",
+    imageUrl: "/Images/earbuds.jpeg",
     stock: 55,
   },
 ];
