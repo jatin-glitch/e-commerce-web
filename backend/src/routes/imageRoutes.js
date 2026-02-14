@@ -10,4 +10,7 @@ const router = express.Router();
 // Serve static images from the Images folder
 router.use('/Images', express.static(path.join(__dirname, '../../Images')));
 
+// Also serve from backend/Images as fallback
+router.use('/Images', express.static(path.join(__dirname, '../Images')));
+
 export default router;
