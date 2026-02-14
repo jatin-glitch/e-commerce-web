@@ -9,6 +9,7 @@ import CheckoutPage from './pages/CheckoutPage.jsx';
 import MockJazzCashPage from './pages/MockJazzCashPage.jsx';
 import LoginPage from './pages/LoginPage.jsx';
 import RegisterPage from './pages/RegisterPage.jsx';
+import AuthSuccessPage from './pages/AuthSuccessPage.jsx';
 import ReviewsPage from './pages/ReviewsPage.jsx';
 import AdminProductsPage from './pages/admin/AdminProductsPage.jsx';
 import AdminOrdersPage from './pages/admin/AdminOrdersPage.jsx';
@@ -56,6 +57,7 @@ function App() {
             />
             <Route path="/login" element={<LoginPage />} />
             <Route path="/register" element={<RegisterPage />} />
+            <Route path="/auth/success" element={<AuthSuccessPage />} />
             <Route
               path="/admin/products"
               element={

@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { Link, useNavigate, useLocation } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext.jsx';
+import GoogleSignInButton from '../components/GoogleSignInButton.jsx';
 
 export default function LoginPage() {
   const [email, setEmail] = useState('');
@@ -62,14 +63,22 @@ export default function LoginPage() {
         >
           {submitting ? 'Signing in…' : 'Login'}
         </button>
-        <p className="text-sm mt-2">
-          New here?{' '}
-          <Link to="/register" className="link">
-            Create an account
-          </Link>
-          .
-        </p>
       </form>
+      
+      <div className="mt-4">
+        <div style={{ textAlign: 'center', margin: '16px 0', color: '#666' }}>
+          OR
+        </div>
+        <GoogleSignInButton text="Sign in with Google" />
+      </div>
+      
+      <p className="text-sm mt-4">
+        New here?{' '}
+        <Link to="/register" className="link">
+          Create an account
+        </Link>
+        .
+      </p>
     </div>
   );
 }

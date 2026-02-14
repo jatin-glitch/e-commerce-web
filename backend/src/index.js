@@ -3,6 +3,7 @@ import cors from "cors";
 import cookieParser from "cookie-parser";
 import mongoose from "mongoose";
 import dotenv from "dotenv";
+import passport from "passport";
 
 import authRoutes from "./routes/authRoutes.js";
 import productRoutes from "./routes/productRoutes.js";
@@ -10,6 +11,7 @@ import orderRoutes from "./routes/orderRoutes.js";
 import paymentRoutes from "./routes/paymentRoutes.js";
 import imageRoutes from "./routes/imageRoutes.js";
 import { seedProducts, clearAndSeedProducts } from "./routes/seedRoutes.js";
+import "./config/passport.js";
 
 dotenv.config();
 
@@ -30,6 +32,7 @@ app.use(
 );
 app.use(express.json());
 app.use(cookieParser());
+app.use(passport.initialize());
 
 app.get("/api/health", (_req, res) => {
   res.json({ status: "ok" });

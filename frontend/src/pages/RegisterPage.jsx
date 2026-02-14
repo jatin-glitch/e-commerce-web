@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext.jsx';
+import GoogleSignInButton from '../components/GoogleSignInButton.jsx';
 
 export default function RegisterPage() {
   const [name, setName] = useState('');
@@ -89,14 +90,22 @@ export default function RegisterPage() {
         >
           {submitting ? 'Creating account…' : 'Sign up'}
         </button>
-        <p className="text-sm mt-2">
-          Already have an account?{' '}
-          <Link to="/login" className="link">
-            Login
-          </Link>
-          .
-        </p>
       </form>
+      
+      <div className="mt-4">
+        <div style={{ textAlign: 'center', margin: '16px 0', color: '#666' }}>
+          OR
+        </div>
+        <GoogleSignInButton text="Sign up with Google" />
+      </div>
+      
+      <p className="text-sm mt-4">
+        Already have an account?{' '}
+        <Link to="/login" className="link">
+          Login
+        </Link>
+        .
+      </p>
     </div>
   );
 }

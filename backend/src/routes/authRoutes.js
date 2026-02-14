@@ -1,6 +1,7 @@
 import express from "express";
 import jwt from "jsonwebtoken";
 import User from "../models/User.js";
+import passport from "../config/passport.js";
 
 const router = express.Router();
 
@@ -114,6 +115,27 @@ router.get("/me", async (req, res) => {
     res.status(200).json({ user: null });
   }
 });
+
+router.get("/google", passport.authenticate("google", { scope: ["profile", "email"] }));
+
+router.get(
+  "/google/callback",
+  passport.authenticate("google", { failureRedirect: `${process.env.CLIENT_URL}/login?error=google_auth_failed` }),
+  (req, res) => {
+    const token = createToken(req.user._id, req.user.role);
+    setAuthCookie(res, token);
+    
+    const safeUser = {
+      id: req.user._id,
+      name: req.user.name,
+      email: req.user.email,
+      role: req.user.role,
+      avatar: req.user.avatar,
+    };
+    
+    res.redirect(`${process.env.CLIENT_URL}/auth/success?user=${encodeURIComponent(JSON.stringify(safeUser))}`);
+  }
+);
 
 export default router;
 

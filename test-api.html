@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>API Test</title>
+</head>
+<body>
+    <h1>API Connection Test</h1>
+    <div id="result">Testing...</div>
+    
+    <script>
+        fetch('https://e-commerce-web-production-f0f4.up.railway.app/api/products')
+            .then(response => response.json())
+            .then(data => {
+                document.getElementById('result').innerHTML = 
+                    `<h2>✅ API Working!</h2>
+                     <p>Found ${data.length} products</p>
+                     <pre>${JSON.stringify(data[0], null, 2)}</pre>`;
+            })
+            .catch(error => {
+                document.getElementById('result').innerHTML = 
+                    `<h2>❌ API Error</h2>
+                     <p>${error.message}</p>`;
+            });
+    </script>
+</body>
+</html>

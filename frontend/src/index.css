@@ -654,7 +654,7 @@ img {
 }
 
 .hamburger-btn {
-  display: none; /* Hidden by default, shown on mobile */
+  display: flex;
   flex-direction: column;
   justify-content: center;
   width: 30px;
@@ -664,7 +664,6 @@ img {
   border-radius: 6px;
   cursor: pointer;
   transition: all 0.3s ease;
-  padding: 5px;
 }
 
 .hamburger-btn:hover {
@@ -683,28 +682,6 @@ img {
 
 .hamburger-line.open:nth-child(1) {
   transform: rotate(45deg) translate(5px, 5px);
-}
-
-.hamburger-line.open:nth-child(2) {
-  opacity: 0;
-}
-
-.hamburger-line.open:nth-child(3) {
-  transform: rotate(-45deg) translate(5px, -5px);
-}
-
-/* Show hamburger button only on mobile */
-@media (max-width: 600px) {
-  .hamburger-btn {
-    display: flex;
-  }
-}
-
-/* Hide hamburger button on desktop */
-@media (min-width: 601px) {
-  .hamburger-btn {
-    display: none;
-  }
 }
 
 .hamburger-line.open:nth-child(2) {
@@ -1473,6 +1450,21 @@ img {
     display: none; /* Hide desktop nav on mobile */
   }
   
+  .mobile-nav-toggle {
+    display: block;
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    background: rgba(16, 185, 129, 0.8);
+    border: 1px solid rgba(255, 255, 255, 0.4);
+    border-radius: 0.5rem;
+    padding: 0.5rem 1rem;
+    color: white;
+    font-size: 0.9rem;
+    cursor: pointer;
+    z-index: 1001;
+  }
+  
   .mobile-nav-menu {
     display: none;
     position: fixed;
@@ -1483,6 +1475,8 @@ img {
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
     z-index: 998;
     padding: 1rem;
+    max-height: 70vh;
+    overflow-y: auto;
   }
   
   .mobile-nav-menu.open {
@@ -1512,6 +1506,10 @@ img {
 
 /* Hide mobile menu toggle on desktop/laptop */
 @media (min-width: 801px) {
+  .mobile-nav-toggle {
+    display: none;
+  }
+  
   .mobile-nav-menu {
     display: none;
   }
@@ -1552,12 +1550,12 @@ img {
     justify-content: center;
   }
   
-  .hamburger-btn {
+  .mobile-nav-toggle {
     position: relative;
     top: 0;
     right: auto;
     left: 0;
-    margin: 0;
+    margin: 0 auto 1rem 0;
     z-index: 1001;
   }
   
@@ -1572,13 +1570,15 @@ img {
   }
 }
 
-/* Fix mobile menu button positioning - place above auth buttons */
+/* Move mobile menu button to right corner in mobile view */
 @media (max-width: 600px) {
-  .nav-auth {
-    order: 3; /* Move auth buttons below mobile menu */
-    margin-top: 1rem;
-    width: 100%;
-    justify-content: center;
+  .mobile-nav-toggle {
+    position: fixed;
+    top: 1rem;
+    right: 1rem;
+    left: auto;
+    margin: 0;
+    z-index: 1001;
   }
   
   .mobile-nav-menu {
