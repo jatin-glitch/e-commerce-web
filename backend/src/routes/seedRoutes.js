@@ -63,7 +63,7 @@ const sampleProducts = [
     description:
       "Water-resistant laptop backpack with dedicated compartments, USB charging port, and anti-theft design.",
     price: 7999,
-    imageUrl: "/Images/keyboard.svg",
+    imageUrl: "/Images/headphone1.jpeg",
     stock: 45,
   },
   {
@@ -71,7 +71,7 @@ const sampleProducts = [
     description:
       "Fast wireless charging pad compatible with all Qi-enabled devices, LED indicator, and overheating protection.",
     price: 3999,
-    imageUrl: "/Images/sleeve.svg",
+    imageUrl: "/Images/smartwatch.jpeg",
     stock: 60,
   },
   {
@@ -79,7 +79,7 @@ const sampleProducts = [
     description:
       "Waterproof portable speaker with 360-degree sound, 24-hour battery life, and built-in power bank functionality.",
     price: 8999,
-    imageUrl: "/Images/powerbank.svg",
+    imageUrl: "/Images/powerbank.jpeg",
     stock: 55,
   },
 ];
