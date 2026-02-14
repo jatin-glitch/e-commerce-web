@@ -5,15 +5,17 @@ import mongoose from "mongoose";
 import dotenv from "dotenv";
 import passport from "passport";
 
+dotenv.config();
+
 import authRoutes from "./routes/authRoutes.js";
 import productRoutes from "./routes/productRoutes.js";
 import orderRoutes from "./routes/orderRoutes.js";
 import paymentRoutes from "./routes/paymentRoutes.js";
 import imageRoutes from "./routes/imageRoutes.js";
 import { seedProducts, clearAndSeedProducts } from "./routes/seedRoutes.js";
-import "./config/passport.js";
+import { configurePassport } from "./config/passport.js";
 
-dotenv.config();
+configurePassport();
 
 const app = express();
 const PORT = process.env.PORT || 5000;
@@ -51,8 +53,31 @@ mongoose
   .connect(MONGO_URI)
   .then(() => {
     console.log("Connected to MongoDB");
-    app.listen(PORT, () => {
+    const server = app.listen(PORT, () => {
       console.log(`Server listening on port ${PORT}`);
+    });
+
+    // Graceful shutdown handling
+    process.on('SIGTERM', () => {
+      console.log('SIGTERM received, shutting down gracefully');
+      server.close(() => {
+        console.log('HTTP server closed');
+        mongoose.connection.close(false, () => {
+          console.log('MongoDB connection closed');
+          process.exit(0);
+        });
+      });
+    });
+
+    process.on('SIGINT', () => {
+      console.log('SIGINT received, shutting down gracefully');
+      server.close(() => {
+        console.log('HTTP server closed');
+        mongoose.connection.close(false, () => {
+          console.log('MongoDB connection closed');
+          process.exit(0);
+        });
+      });
     });
   })
   .catch((err) => {
