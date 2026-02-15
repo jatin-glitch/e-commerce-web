@@ -2,7 +2,7 @@
   position: fixed;
   top: 20px;
   right: 20px;
-  z-index: 9999;
+  z-index: 5000;
   animation: slideInRight 0.3s ease-out;
   max-width: 350px;
   min-width: 250px;
@@ -98,11 +98,13 @@
 /* Mobile responsive */
 @media (max-width: 480px) {
   .notification {
-    top: 10px;
+    top: auto;
+    bottom: 20px;
     right: 10px;
     left: 10px;
     max-width: none;
     min-width: auto;
+    z-index: 5000;
   }
   
   .notification-content {
