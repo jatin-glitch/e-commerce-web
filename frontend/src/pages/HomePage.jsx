@@ -266,8 +266,7 @@ export default function HomePage() {
                     className="btn btn-secondary btn-add-to-cart"
                     onClick={(e) => {
                       e.preventDefault(); // Prevent default behavior
-                      e.stopPropagation(); // Prevent event bubbling
-                      e.nativeEvent.stopImmediatePropagation(); // Stop immediate propagation
+                      e.stopPropagation(); // Prevent event bubbling to product card link
                       handleAddToCart(
                         {
                           id: p._id,
@@ -277,14 +276,6 @@ export default function HomePage() {
                         },
                         1,
                       );
-                    }}
-                    onTouchStart={(e) => {
-                      e.preventDefault(); // Prevent default touch behavior
-                      e.stopPropagation(); // Prevent touch event bubbling
-                    }}
-                    onTouchEnd={(e) => {
-                      e.preventDefault(); // Prevent default touch behavior
-                      e.stopPropagation(); // Prevent touch event bubbling
                     }}
                     disabled={p.stock === 0}
                   >
@@ -345,8 +336,7 @@ export default function HomePage() {
                       className="btn btn-secondary btn-add-to-cart"
                       onClick={(e) => {
                         e.preventDefault(); // Prevent default behavior
-                        e.stopPropagation(); // Prevent event bubbling
-                        e.nativeEvent.stopImmediatePropagation(); // Stop immediate propagation
+                        e.stopPropagation(); // Prevent event bubbling to product card link
                         handleAddToCart(
                           {
                             id: p._id,
@@ -356,14 +346,6 @@ export default function HomePage() {
                           },
                           1,
                         );
-                      }}
-                      onTouchStart={(e) => {
-                        e.preventDefault(); // Prevent default touch behavior
-                        e.stopPropagation(); // Prevent touch event bubbling
-                      }}
-                      onTouchEnd={(e) => {
-                        e.preventDefault(); // Prevent default touch behavior
-                        e.stopPropagation(); // Prevent touch event bubbling
                       }}
                       disabled={p.stock === 0}
                     >
