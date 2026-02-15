@@ -1768,6 +1768,19 @@ img {
   margin: 0 auto;
 }
 
+/* Notification Container */
+.notification-container {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  z-index: 9999;
+  pointer-events: none;
+}
+
+.notification-container > * {
+  pointer-events: auto;
+}
+
 /* Auth Divider and Google Sign-in Styling */
 .auth-divider {
   display: flex;

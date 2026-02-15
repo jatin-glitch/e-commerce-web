@@ -4,12 +4,14 @@ import {
   useEffect,
   useState,
 } from 'react';
+import { useNotification } from './NotificationContext.jsx';
 
 const CartContext = createContext(null);
 const STORAGE_KEY = 'ecommerce_cart';
 
 export function CartProvider({ children }) {
   const [items, setItems] = useState([]);
+  const { showNotification } = useNotification();
 
   useEffect(() => {
     const saved = window.localStorage.getItem(STORAGE_KEY);
@@ -30,12 +32,14 @@ export function CartProvider({ children }) {
     setItems((prev) => {
       const existing = prev.find((i) => i.product.id === product.id);
       if (existing) {
+        showNotification(`${product.name} quantity updated in cart!`, 'success');
         return prev.map((i) =>
           i.product.id === product.id
             ? { ...i, quantity: i.quantity + quantity }
             : i,
         );
       }
+      showNotification(`${product.name} added to cart successfully!`, 'success');
       return [...prev, { product, quantity }];
     });
   };
@@ -51,10 +55,19 @@ export function CartProvider({ children }) {
   };
 
   const removeFromCart = (productId) => {
-    setItems((prev) => prev.filter((i) => i.product.id !== productId));
+    setItems((prev) => {
+      const item = prev.find(i => i.product.id === productId);
+      if (item) {
+        showNotification(`${item.product.name} removed from cart`, 'info');
+      }
+      return prev.filter((i) => i.product.id !== productId);
+    });
   };
 
-  const clearCart = () => setItems([]);
+  const clearCart = () => {
+    setItems([]);
+    showNotification('Cart cleared successfully!', 'info');
+  };
 
   const total = items.reduce(
     (sum, i) => sum + i.product.price * i.quantity,

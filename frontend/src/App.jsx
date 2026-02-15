@@ -1,6 +1,7 @@
 import { Routes, Route, Navigate } from 'react-router-dom';
 import { AuthProvider, useAuth } from './context/AuthContext.jsx';
 import { CartProvider } from './context/CartContext.jsx';
+import { NotificationProvider } from './context/NotificationContext.jsx';
 import Layout from './components/Layout.jsx';
 import PageTransition from './components/PageTransition.jsx';
 import HomePage from './pages/HomePage.jsx';
@@ -34,56 +35,58 @@ function AdminRoute({ children }) {
 
 function App() {
   return (
-    <AuthProvider>
-      <CartProvider>
-        <Layout>
-          <PageTransition>
-            <Routes>
-              <Route path="/" element={<HomePage />} />
-              <Route path="/product/:id" element={<ProductDetailPage />} />
-              <Route path="/cart" element={<CartPage />} />
-              <Route path="/reviews" element={<ReviewsPage />} />
-              <Route
-                path="/checkout"
-                element={
-                  <PrivateRoute>
-                    <CheckoutPage />
-                  </PrivateRoute>
-                }
-              />
-              <Route
-                path="/mock-jazzcash-gateway"
-                element={
-                  <PrivateRoute>
-                    <MockJazzCashPage />
-                  </PrivateRoute>
-                }
-              />
-              <Route path="/login" element={<LoginPage />} />
-              <Route path="/register" element={<RegisterPage />} />
-              <Route path="/auth/success" element={<AuthSuccessPage />} />
-              <Route
-                path="/admin/products"
-                element={
-                  <AdminRoute>
-                    <AdminProductsPage />
-                  </AdminRoute>
-                }
-              />
-              <Route
-                path="/admin/orders"
-                element={
-                  <AdminRoute>
-                    <AdminOrdersPage />
-                  </AdminRoute>
-                }
-              />
-              <Route path="*" element={<Navigate to="/" replace />} />
-            </Routes>
-          </PageTransition>
-        </Layout>
-      </CartProvider>
-    </AuthProvider>
+    <NotificationProvider>
+      <AuthProvider>
+        <CartProvider>
+          <Layout>
+            <PageTransition>
+              <Routes>
+                <Route path="/" element={<HomePage />} />
+                <Route path="/product/:id" element={<ProductDetailPage />} />
+                <Route path="/cart" element={<CartPage />} />
+                <Route path="/reviews" element={<ReviewsPage />} />
+                <Route
+                  path="/checkout"
+                  element={
+                    <PrivateRoute>
+                      <CheckoutPage />
+                    </PrivateRoute>
+                  }
+                />
+                <Route
+                  path="/mock-jazzcash-gateway"
+                  element={
+                    <PrivateRoute>
+                      <MockJazzCashPage />
+                    </PrivateRoute>
+                  }
+                />
+                <Route path="/login" element={<LoginPage />} />
+                <Route path="/register" element={<RegisterPage />} />
+                <Route path="/auth/success" element={<AuthSuccessPage />} />
+                <Route
+                  path="/admin/products"
+                  element={
+                    <AdminRoute>
+                      <AdminProductsPage />
+                    </AdminRoute>
+                  }
+                />
+                <Route
+                  path="/admin/orders"
+                  element={
+                    <AdminRoute>
+                      <AdminOrdersPage />
+                    </AdminRoute>
+                  }
+                />
+                <Route path="*" element={<Navigate to="/" replace />} />
+              </Routes>
+            </PageTransition>
+          </Layout>
+        </CartProvider>
+      </AuthProvider>
+    </NotificationProvider>
   );
 }
 

@@ -5,12 +5,14 @@ import {
   useState,
 } from 'react';
 import api from '../lib/api.js';
+import { useNotification } from './NotificationContext.jsx';
 
 const AuthContext = createContext(null);
 
 export function AuthProvider({ children }) {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
+  const { showNotification } = useNotification();
 
   useEffect(() => {
     const fetchMe = async () => {
@@ -45,6 +47,7 @@ export function AuthProvider({ children }) {
     const userData = res.data.user;
     setUser(userData);
     localStorage.setItem('user', JSON.stringify(userData));
+    showNotification('Login successful! Welcome back!', 'success');
   };
 
   const register = async (payload) => {
@@ -53,6 +56,7 @@ export function AuthProvider({ children }) {
       const userData = res.data.user;
       setUser(userData);
       localStorage.setItem('user', JSON.stringify(userData));
+      showNotification('Registration successful! Welcome to MegaMart!', 'success');
     } catch (error) {
       // Re-throw the error so the component can handle it
       throw error;
@@ -63,6 +67,7 @@ export function AuthProvider({ children }) {
     await api.post('/auth/logout');
     setUser(null);
     localStorage.removeItem('user');
+    showNotification('Logged out successfully!', 'info');
   };
 
   return (
