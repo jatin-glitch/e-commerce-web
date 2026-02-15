@@ -1,12 +1,10 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useCart } from '../context/CartContext.jsx';
-import { useNotification } from '../context/NotificationContext.jsx';
 import api from '../lib/api.js';
 
 export default function CheckoutPage() {
   const { items, total, clearCart } = useCart();
-  const { showNotification } = useNotification();
   const [shipping, setShipping] = useState({
     fullName: '',
     addressLine1: '',
@@ -48,16 +46,15 @@ export default function CheckoutPage() {
       };
       const res = await api.post('/orders', payload);
       clearCart();
-      showNotification('Your order is successfully taken and we will contact you soon!', 'success', 5000);
-      
       if (paymentMethod === 'JAZZCASH_MOCK' && res.data.jazzCashMockUrl) {
         navigate(res.data.jazzCashMockUrl);
       } else {
         navigate(`/`);
+        // In a real app you might navigate to an order confirmation page.
       }
     } catch (err) {
       console.error('Failed to place order', err);
-      showNotification('Failed to place order. Please try again.', 'error');
+      // For brevity we just log; could show a toast or inline error.
     } finally {
       setSubmitting(false);
     }

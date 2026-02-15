@@ -19,8 +19,7 @@ export function AuthProvider({ children }) {
       try {
         // First check if user data exists in localStorage (from Google OAuth)
         const storedUser = localStorage.getItem('user');
-        const storedToken = localStorage.getItem('token');
-        if (storedUser && storedToken) {
+        if (storedUser) {
           const parsedUser = JSON.parse(storedUser);
           setUser(parsedUser);
           setLoading(false);
@@ -36,7 +35,6 @@ export function AuthProvider({ children }) {
       } catch {
         setUser(null);
         localStorage.removeItem('user');
-        localStorage.removeItem('token');
       } finally {
         setLoading(false);
       }
@@ -47,12 +45,8 @@ export function AuthProvider({ children }) {
   const login = async (email, password) => {
     const res = await api.post('/auth/login', { email, password });
     const userData = res.data.user;
-    const token = res.data.token;
     setUser(userData);
     localStorage.setItem('user', JSON.stringify(userData));
-    if (token) {
-      localStorage.setItem('token', token);
-    }
     showNotification('Login successful! Welcome back!', 'success');
   };
 
@@ -60,12 +54,8 @@ export function AuthProvider({ children }) {
     try {
       const res = await api.post('/auth/register', payload);
       const userData = res.data.user;
-      const token = res.data.token;
       setUser(userData);
       localStorage.setItem('user', JSON.stringify(userData));
-      if (token) {
-        localStorage.setItem('token', token);
-      }
       showNotification('Registration successful! Welcome to MegaMart!', 'success');
     } catch (error) {
       // Re-throw the error so the component can handle it
@@ -77,7 +67,6 @@ export function AuthProvider({ children }) {
     await api.post('/auth/logout');
     setUser(null);
     localStorage.removeItem('user');
-    localStorage.removeItem('token');
     showNotification('Logged out successfully!', 'info');
   };
 

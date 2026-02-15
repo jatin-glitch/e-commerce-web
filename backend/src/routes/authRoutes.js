@@ -52,7 +52,7 @@ router.post("/register", async (req, res) => {
       role: user.role,
     };
 
-    res.status(201).json({ user: safeUser, token });
+    res.status(201).json({ user: safeUser });
   } catch (err) {
     console.error("register error", err);
     res.status(500).json({ message: "Failed to register" });
@@ -86,7 +86,7 @@ router.post("/login", async (req, res) => {
       role: user.role,
     };
 
-    res.json({ user: safeUser, token });
+    res.json({ user: safeUser });
   } catch (err) {
     console.error("login error", err);
     res.status(500).json({ message: "Failed to login" });
@@ -136,7 +136,7 @@ router.get(
       avatar: req.user.avatar,
     };
     
-    res.redirect(`${process.env.CLIENT_URL}/auth/success?user=${encodeURIComponent(JSON.stringify(safeUser))}&token=${token}`);
+    res.redirect(`${process.env.CLIENT_URL}/auth/success?user=${encodeURIComponent(JSON.stringify(safeUser))}`);
   }
 );
 
