@@ -1031,6 +1031,7 @@ img {
   position: relative;
   overflow: hidden;
   transform: translateZ(0);
+  -webkit-tap-highlight-color: transparent;
 }
 
 .product-card::before {
@@ -1062,6 +1063,7 @@ img {
   min-height: 160px;
   display: grid;
   place-items: center;
+  -webkit-tap-highlight-color: transparent; /* Remove tap highlight */
 }
 
 .product-image img {
@@ -1833,7 +1835,7 @@ img {
   min-height: 44px; /* iOS touch target minimum */
   touch-action: manipulation; /* Improve touch responsiveness */
   user-select: none; /* Prevent text selection on touch */
-  -webkit-tap-highlight-color: transparent; /* Remove tap highlight */
+  -webkit-tap-highlight-color: rgba(16, 185, 129, 0.3); /* Green tap highlight for button */
   pointer-events: auto; /* Ensure button receives events */
   isolation: isolate; /* Create new stacking context */
   transform: translateZ(0); /* Hardware acceleration */
