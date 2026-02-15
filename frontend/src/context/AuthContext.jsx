@@ -17,20 +17,15 @@ export function AuthProvider({ children }) {
   useEffect(() => {
     const fetchMe = async () => {
       try {
-        // First check if user data exists in localStorage (from Google OAuth)
-        const storedUser = localStorage.getItem('user');
-        if (storedUser) {
-          const parsedUser = JSON.parse(storedUser);
-          setUser(parsedUser);
-          setLoading(false);
-          return;
-        }
-
-        // If no stored user, fetch from API
+        // Always validate with the backend to ensure cookies are valid
         const res = await api.get('/auth/me');
         if (res.data.user) {
           setUser(res.data.user);
           localStorage.setItem('user', JSON.stringify(res.data.user));
+        } else {
+          // If backend says no user, clear localStorage
+          setUser(null);
+          localStorage.removeItem('user');
         }
       } catch {
         setUser(null);
