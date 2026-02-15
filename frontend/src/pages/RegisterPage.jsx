@@ -22,7 +22,9 @@ export default function RegisterPage() {
       navigate('/');
     } catch (err) {
       console.error('Register failed', err);
-      setError('Unable to create account. Try a different email.');
+      // Show the actual error message from backend if available
+      const errorMessage = err.response?.data?.message || err.message || 'Unable to create account. Try a different email.';
+      setError(errorMessage);
     } finally {
       setSubmitting(false);
     }

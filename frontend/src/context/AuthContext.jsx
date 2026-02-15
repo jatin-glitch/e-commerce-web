@@ -48,10 +48,15 @@ export function AuthProvider({ children }) {
   };
 
   const register = async (payload) => {
-    const res = await api.post('/auth/register', payload);
-    const userData = res.data.user;
-    setUser(userData);
-    localStorage.setItem('user', JSON.stringify(userData));
+    try {
+      const res = await api.post('/auth/register', payload);
+      const userData = res.data.user;
+      setUser(userData);
+      localStorage.setItem('user', JSON.stringify(userData));
+    } catch (error) {
+      // Re-throw the error so the component can handle it
+      throw error;
+    }
   };
 
   const logout = async () => {
