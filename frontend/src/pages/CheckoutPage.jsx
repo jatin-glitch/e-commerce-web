@@ -48,16 +48,16 @@ export default function CheckoutPage() {
       };
       const res = await api.post('/orders', payload);
       clearCart();
-      showNotification('Your order has been successfully placed! Thank you for your purchase.', 'success');
+      showNotification('Your order is successfully taken and we will contact you soon!', 'success', 5000);
+      
       if (paymentMethod === 'JAZZCASH_MOCK' && res.data.jazzCashMockUrl) {
         navigate(res.data.jazzCashMockUrl);
       } else {
         navigate(`/`);
-        // In a real app you might navigate to an order confirmation page.
       }
     } catch (err) {
       console.error('Failed to place order', err);
-      // For brevity we just log; could show a toast or inline error.
+      showNotification('Failed to place order. Please try again.', 'error');
     } finally {
       setSubmitting(false);
     }
