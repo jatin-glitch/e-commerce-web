@@ -1536,24 +1536,10 @@ img {
   pointer-events: none;
 }
 
-/* Hide hamburger menu on all screen sizes */
-@media (max-width: 768px) {
+/* Hide hamburger menu on all screen sizes - show only on mobile phones */
+@media (max-width: 600px) {
   .hamburger-btn {
-    display: none;
-  }
-}
-
-/* Hide hamburger menu on tablets and laptops */
-@media (min-width: 769px) and (max-width: 1024px) {
-  .hamburger-btn {
-    display: none;
-  }
-}
-
-/* Hide hamburger on larger desktop screens */
-@media (min-width: 1025px) {
-  .hamburger-btn {
-    display: none;
+    display: flex;
   }
 }
 
@@ -1766,6 +1752,78 @@ img {
 .auth-layout {
   max-width: 420px;
   margin: 0 auto;
+}
+
+/* Mobile cart remove button styling */
+.btn-remove-mobile {
+  width: 32px !important;
+  height: 32px !important;
+  padding: 0 !important;
+  border-radius: 50% !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  font-size: 16px !important;
+  font-weight: bold !important;
+  min-width: auto !important;
+  line-height: 1 !important;
+  background: #ef4444 !important;
+  color: white !important;
+  border: 1px solid #dc2626 !important;
+  transition: all 0.2s ease !important;
+}
+
+.btn-remove-mobile:hover {
+  background: #dc2626 !important;
+  border-color: #b91c1c !important;
+  transform: scale(1.1) !important;
+}
+
+.btn-remove-mobile:active {
+  transform: scale(0.95) !important;
+}
+
+/* Mobile table optimizations */
+@media (max-width: 768px) {
+  .table {
+    font-size: 0.9rem;
+  }
+  
+  .table th,
+  .table td {
+    padding: 0.5rem;
+    white-space: nowrap;
+  }
+  
+  .table th:nth-child(3),
+  .table th:nth-child(4),
+  .table td:nth-child(3),
+  .table td:nth-child(4) {
+    display: none;
+  }
+  
+  .btn-remove-mobile {
+    width: 28px !important;
+    height: 28px !important;
+    font-size: 14px !important;
+  }
+}
+
+@media (max-width: 480px) {
+  .table {
+    font-size: 0.8rem;
+  }
+  
+  .table th,
+  .table td {
+    padding: 0.3rem;
+  }
+  
+  .btn-remove-mobile {
+    width: 24px !important;
+    height: 24px !important;
+    font-size: 12px !important;
+  }
 }
 
 /* Notification Container */
@@ -2640,11 +2698,6 @@ left: 100%;
     box-shadow: 0 6px 20px rgba(16, 185, 129, 0.4);
   }
   
-  /* Hide hamburger menu on mobile phones */
-  .hamburger-btn {
-    display: none !important;
-  }
-  
   .category-dropdown {
     position: absolute;
     top: calc(100% + 8px);
@@ -2655,8 +2708,8 @@ left: 100%;
   }
 }
 
-/* Hide mobile menu toggle on desktop */
-@media (min-width: 1025px) {
+/* Hide mobile menu toggle on desktop and tablet */
+@media (min-width: 768px) {
   .mobile-nav-toggle {
     display: none;
   }

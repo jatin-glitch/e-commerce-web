@@ -84,10 +84,11 @@ export default function CartPage() {
                   <td>
                     <button
                       type="button"
-                      className="btn btn-ghost text-sm"
+                      className="btn btn-ghost btn-remove-mobile"
                       onClick={() => removeFromCart(item.product.id)}
+                      title="Remove item"
                     >
-                      Remove
+                      ✕
                     </button>
                   </td>
                 </tr>

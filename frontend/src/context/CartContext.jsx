@@ -28,6 +28,26 @@ export function CartProvider({ children }) {
     window.localStorage.setItem(STORAGE_KEY, JSON.stringify(items));
   }, [items]);
 
+  // Check if user is logged out and clear cart
+  useEffect(() => {
+    const checkUserAndClearCart = () => {
+      const user = localStorage.getItem('user');
+      if (!user && items.length > 0) {
+        // User is logged out but cart has items, clear the cart
+        setItems([]);
+        window.localStorage.removeItem(STORAGE_KEY);
+      }
+    };
+
+    // Check immediately
+    checkUserAndClearCart();
+
+    // Set up interval to check periodically (in case user logs out from another tab)
+    const interval = setInterval(checkUserAndClearCart, 1000);
+
+    return () => clearInterval(interval);
+  }, [items.length]);
+
   const addToCart = (product, quantity = 1) => {
     setItems((prev) => {
       const existing = prev.find((i) => i.product.id === product.id);
