@@ -65,20 +65,24 @@ export default function LoginPage() {
         </button>
       </form>
       
-      <div className="mt-4">
-        <div style={{ textAlign: 'center', margin: '16px 0', color: '#666' }}>
-          OR
-        </div>
+      <div className="auth-divider">
+        <div className="divider-line"></div>
+        <span className="divider-text">OR</span>
+        <div className="divider-line"></div>
+      </div>
+      
+      <div className="google-signin-container">
         <GoogleSignInButton text="Sign in with Google" />
       </div>
       
-      <p className="text-sm mt-4">
-        New here?{' '}
-        <Link to="/register" className="link">
-          Create an account
-        </Link>
-        .
-      </p>
+      <div className="auth-footer">
+        <p className="new-user-text">
+          New to MegaMart?{' '}
+          <Link to="/register" className="auth-link">
+            Create account
+          </Link>
+        </p>
+      </div>
     </div>
   );
 }

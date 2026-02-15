@@ -1768,6 +1768,73 @@ img {
   margin: 0 auto;
 }
 
+/* Auth Divider and Google Sign-in Styling */
+.auth-divider {
+  display: flex;
+  align-items: center;
+  margin: 2rem 0;
+  gap: 1rem;
+}
+
+.divider-line {
+  flex: 1;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, #e5e7eb, transparent);
+}
+
+.divider-text {
+  color: #6b7280;
+  font-size: 0.875rem;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.google-signin-container {
+  display: flex;
+  justify-content: center;
+  margin: 1.5rem 0;
+}
+
+.auth-footer {
+  text-align: center;
+  margin-top: 2rem;
+}
+
+.new-user-text {
+  font-size: 0.95rem;
+  color: #374151;
+  margin: 0;
+}
+
+.auth-link {
+  color: #3b82f6;
+  text-decoration: none;
+  font-weight: 600;
+  transition: all 0.3s ease;
+  border-bottom: 2px solid transparent;
+}
+
+.auth-link:hover {
+  color: #2563eb;
+  border-bottom-color: #2563eb;
+}
+
+/* Responsive auth styles */
+@media (max-width: 480px) {
+  .auth-divider {
+    margin: 1.5rem 0;
+  }
+  
+  .google-signin-container {
+    margin: 1rem 0;
+  }
+  
+  .new-user-text {
+    font-size: 0.9rem;
+  }
+}
+
 .auth-header {
   text-align: center;
   margin-bottom: 1.2rem;
@@ -2508,18 +2575,10 @@ img {
   }
   
   .mobile-nav-item:not(.nav-item-primary):hover {
-    background: rgba(16, 185, 129, 0.1);
-    color: #10b981;
-    transform: translateX(4px);
-  }
 
-  /* User info styling */
-  .mobile-nav-item.user-info {
-    background: linear-gradient(135deg, #f8fafc, #e2e8f0);
-    color: #64748b;
-    font-weight: 500;
-    border: 1px solid rgba(148, 163, 184, 0.2);
-    cursor: default;
+.mobile-nav-item:not(.nav-item-primary):hover::before {
+left: 100%;
+}
   }
 
   .mobile-nav-item.user-info:hover {
@@ -2602,9 +2661,97 @@ img {
   grid-template-columns: minmax(0, 2fr) minmax(0, 1.7fr);
   gap: 1.5rem;
   align-items: center;
-  margin-bottom: 2rem;
+  padding: 1rem 0 3rem 0;
   min-height: 60vh;
-  padding: 2rem 0;
+  position: relative;
+}
+
+.hero-banner > div:first-child {
+  position: relative;
+  z-index: 2;
+}
+
+.hero-heading {
+  font-size: 3.5rem;
+  font-weight: 800;
+  line-height: 1.1;
+  margin-bottom: 1.5rem;
+  background: linear-gradient(135deg, 
+    #1e3a8a 0%, 
+    #1e40af 25%, 
+    #2563eb 50%, 
+    #1e40af 75%, 
+    #1e3a8a 100%
+  );
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  position: relative;
+  opacity: 0;
+  transform: translateY(30px);
+  animation: heroHeadingSlideIn 1s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+  animation-delay: 0.3s;
+}
+
+@keyframes heroHeadingSlideIn {
+  0% {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.hero-heading::after {
+  content: '';
+  position: absolute;
+  bottom: -8px;
+  left: 0;
+  width: 100px;
+  height: 4px;
+  background: linear-gradient(90deg, #1e3a8a, #2563eb, #1e3a8a);
+  border-radius: 2px;
+  opacity: 0;
+  transform: scaleX(0);
+  transform-origin: left;
+  animation: underlineSlideIn 0.8s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+  animation-delay: 0.8s;
+}
+
+@keyframes underlineSlideIn {
+  0% {
+    opacity: 0;
+    transform: scaleX(0);
+  }
+  100% {
+    opacity: 1;
+    transform: scaleX(1);
+  }
+}
+
+.hero-text {
+  font-size: 1.2rem;
+  line-height: 1.7;
+  color: #374151;
+  margin-bottom: 2rem;
+  position: relative;
+  opacity: 0;
+  transform: translateY(20px);
+  animation: heroTextSlideIn 1s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+  animation-delay: 0.6s;
+}
+
+@keyframes heroTextSlideIn {
+  0% {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 .hero-banner .hero-card {
@@ -2614,11 +2761,53 @@ img {
 @media (max-width: 800px) {
   .hero-banner {
     grid-template-columns: minmax(0, 1fr);
-    padding: 1rem 0;
+    padding: 0.5rem 0 2rem 0;
+    min-height: 50vh;
   }
   
   .hero-banner .hero-card {
     order: -1;
+  }
+  
+  .hero-heading {
+    font-size: 2.5rem;
+    margin-bottom: 1.2rem;
+  }
+  
+  .hero-heading::after {
+    width: 80px;
+    height: 3px;
+  }
+  
+  .hero-text {
+    font-size: 1.1rem;
+    margin-bottom: 1.5rem;
+  }
+}
+
+/* Laptop specific optimizations */
+@media (min-width: 801px) and (max-width: 1200px) {
+  .hero-banner {
+    padding: 0.5rem 0 2.5rem 0;
+    min-height: 55vh;
+    gap: 2rem;
+  }
+  
+  .hero-heading {
+    font-size: 2.8rem;
+    line-height: 1.2;
+    margin-bottom: 1.2rem;
+  }
+  
+  .hero-heading::after {
+    width: 90px;
+    height: 3.5px;
+  }
+  
+  .hero-text {
+    font-size: 1.1rem;
+    line-height: 1.6;
+    max-width: 90%;
   }
 }
 

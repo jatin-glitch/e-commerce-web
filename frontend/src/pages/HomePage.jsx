@@ -119,23 +119,13 @@ export default function HomePage() {
       <section className="hero-banner">
         <div>
           <h1 className="hero-heading">
-            Modern E-commerce Demo with Premium Features
+            Discover Premium Electronics & Smart Devices
           </h1>
           <p className="hero-text">
-            Browse cutting-edge products including AR glasses, professional audio gear, 
-            and smart devices. Enjoy secure shopping with multiple payment options 
-            and fast delivery across Pakistan.
+            Explore our curated collection of cutting-edge technology including AR glasses, 
+            professional audio equipment, and innovative smart devices. Experience secure shopping 
+            with flexible payment options and reliable nationwide delivery across Pakistan.
           </p>
-          <div className="pill-row">
-            <span>Auth & Roles</span>
-            <span>Products & Cart</span>
-            <span>COD & Mock JazzCash</span>
-            <span>Admin Panel</span>
-          </div>
-          <div className="modern-ecommerce-demo">
-            <span className="demo-text">🛍️ Modern E-commerce Demo</span>
-            <span className="checkout-text">COD & Mock JazzCash checkout</span>
-          </div>
         </div>
       </section>
 
