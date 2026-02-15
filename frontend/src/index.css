@@ -1834,6 +1834,9 @@ img {
   touch-action: manipulation; /* Improve touch responsiveness */
   user-select: none; /* Prevent text selection on touch */
   -webkit-tap-highlight-color: transparent; /* Remove tap highlight */
+  pointer-events: auto; /* Ensure button receives events */
+  isolation: isolate; /* Create new stacking context */
+  transform: translateZ(0); /* Hardware acceleration */
 }
 
 .btn-add-to-cart:hover {
@@ -1844,6 +1847,21 @@ img {
 .btn-add-to-cart:active {
   transform: translateY(0);
   box-shadow: 0 2px 6px rgba(59, 130, 246, 0.2);
+}
+
+/* Prevent product card click interference on mobile */
+.product-card {
+  position: relative;
+  isolation: isolate; /* Create new stacking context */
+}
+
+.product-card > * {
+  pointer-events: auto; /* Ensure children can receive events */
+}
+
+.btn-add-to-cart {
+  pointer-events: auto !important; /* Override any inherited pointer-events */
+  z-index: 15 !important; /* Ensure button is on top */
 }
 
 /* Mobile specific button improvements */
@@ -1858,6 +1876,8 @@ img {
     background: linear-gradient(135deg, #3b82f6, #2563eb);
     color: white;
     transition: all 0.2s ease;
+    isolation: isolate; /* Prevent parent interference */
+    transform: translateZ(0); /* Hardware acceleration */
   }
   
   .btn-add-to-cart:hover {
@@ -1875,6 +1895,17 @@ img {
     border-color: #d1d5db;
     cursor: not-allowed;
     transform: none;
+  }
+  
+  /* Ensure button is clickable above all other elements */
+  .product-card {
+    isolation: isolate;
+  }
+  
+  .btn-add-to-cart {
+    isolation: isolate;
+    position: relative;
+    z-index: 20;
   }
 }
 
