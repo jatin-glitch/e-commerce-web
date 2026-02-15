@@ -1826,6 +1826,58 @@ img {
   }
 }
 
+/* Mobile add to cart button fixes */
+.btn-add-to-cart {
+  position: relative;
+  z-index: 10;
+  min-height: 44px; /* iOS touch target minimum */
+  touch-action: manipulation; /* Improve touch responsiveness */
+  user-select: none; /* Prevent text selection on touch */
+  -webkit-tap-highlight-color: transparent; /* Remove tap highlight */
+}
+
+.btn-add-to-cart:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3);
+}
+
+.btn-add-to-cart:active {
+  transform: translateY(0);
+  box-shadow: 0 2px 6px rgba(59, 130, 246, 0.2);
+}
+
+/* Mobile specific button improvements */
+@media (max-width: 768px) {
+  .btn-add-to-cart {
+    min-height: 48px; /* Larger touch target on mobile */
+    padding: 12px 16px;
+    font-size: 14px;
+    font-weight: 600;
+    border-radius: 8px;
+    border: 2px solid rgba(59, 130, 246, 0.3);
+    background: linear-gradient(135deg, #3b82f6, #2563eb);
+    color: white;
+    transition: all 0.2s ease;
+  }
+  
+  .btn-add-to-cart:hover {
+    background: linear-gradient(135deg, #2563eb, #1d4ed8);
+    border-color: rgba(59, 130, 246, 0.5);
+  }
+  
+  .btn-add-to-cart:active {
+    background: linear-gradient(135deg, #1d4ed8, #1e40af);
+    transform: scale(0.98);
+  }
+  
+  .btn-add-to-cart:disabled {
+    background: #9ca3af;
+    border-color: #d1d5db;
+    cursor: not-allowed;
+    transform: none;
+  }
+}
+
 /* Notification Container */
 .notification-container {
   position: fixed;

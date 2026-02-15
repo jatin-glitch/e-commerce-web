@@ -51,11 +51,11 @@ const sampleProducts = [
     stock: 30,
   },
   {
-    name: "meta.jpeg",
+    name: "Meta Glasses",
     description:
       "Stylish smart glasses with built-in cameras, open-ear speakers, touch controls, and smartphone integration for hands-free use.",
     price: 45999,
-    imageUrl: "/Images/camera.jpeg",
+    imageUrl: "/Images/meta glasses.jpeg",
     stock: 20,
   },
 ];

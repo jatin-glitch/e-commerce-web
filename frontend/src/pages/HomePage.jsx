@@ -263,8 +263,9 @@ export default function HomePage() {
                   </span>
                   <button
                     type="button"
-                    className="btn btn-secondary"
-                    onClick={() =>
+                    className="btn btn-secondary btn-add-to-cart"
+                    onClick={(e) => {
+                      e.stopPropagation(); // Prevent event bubbling
                       handleAddToCart(
                         {
                           id: p._id,
@@ -273,8 +274,8 @@ export default function HomePage() {
                           imageUrl: p.imageUrl,
                         },
                         1,
-                      )
-                    }
+                      );
+                    }}
                     disabled={p.stock === 0}
                   >
                     {p.stock === 0 ? 'Out of stock' : 'Add to cart'}
@@ -331,8 +332,9 @@ export default function HomePage() {
                     </span>
                     <button
                       type="button"
-                      className="btn btn-secondary"
-                      onClick={() =>
+                      className="btn btn-secondary btn-add-to-cart"
+                      onClick={(e) => {
+                        e.stopPropagation(); // Prevent event bubbling
                         handleAddToCart(
                           {
                             id: p._id,
@@ -341,8 +343,8 @@ export default function HomePage() {
                             imageUrl: p.imageUrl,
                           },
                           1,
-                        )
-                      }
+                        );
+                      }}
                       disabled={p.stock === 0}
                     >
                       {p.stock === 0 ? 'Out of stock' : 'Add to cart'}
