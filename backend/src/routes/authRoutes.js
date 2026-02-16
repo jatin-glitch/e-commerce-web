@@ -17,7 +17,7 @@ const setAuthCookie = (res, token) => {
   res.cookie("token", token, {
     httpOnly: true,
     secure: isProduction,
-    sameSite: isProduction ? "strict" : "lax",
+    sameSite: isProduction ? "none" : "lax", // Changed from "strict" to "none" for cross-domain
     maxAge: 7 * 24 * 60 * 60 * 1000,
   });
 };
