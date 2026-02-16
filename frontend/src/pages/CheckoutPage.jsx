@@ -46,7 +46,13 @@ export default function CheckoutPage() {
         shippingAddress: shipping,
         paymentMethod,
       };
+      
+      // Debug: Log the API URL being used
+      console.log('API Base URL:', api.defaults.baseURL);
+      console.log('Order payload:', payload);
+      
       const res = await api.post('/orders', payload);
+      console.log('Order response:', res.data);
       clearCart();
       
       // Show success notification
@@ -62,7 +68,11 @@ export default function CheckoutPage() {
         navigate(`/`);
       }
     } catch (err) {
-      console.error('Failed to place order', err);
+      console.error('Failed to place order - Full error:', err);
+      console.error('Error response:', err.response);
+      console.error('Error status:', err.response?.status);
+      console.error('Error data:', err.response?.data);
+      
       showNotification(
         'Failed to place order. Please try again.',
         'error',
