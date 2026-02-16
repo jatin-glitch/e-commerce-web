@@ -60,7 +60,6 @@ export default function CheckoutPage() {
         navigate(res.data.jazzCashMockUrl);
       } else {
         navigate(`/`);
-        // In a real app you might navigate to an order confirmation page.
       }
     } catch (err) {
       console.error('Failed to place order', err);
