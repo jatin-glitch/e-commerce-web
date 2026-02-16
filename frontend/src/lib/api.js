@@ -24,6 +24,25 @@ const api = axios.create({
   withCredentials: true,
 });
 
+// Add request interceptor to debug cookies
+api.interceptors.request.use((config) => {
+  console.log('Request cookies:', document.cookie);
+  console.log('Request headers:', config.headers);
+  return config;
+});
+
+// Add response interceptor to debug responses
+api.interceptors.response.use(
+  (response) => {
+    console.log('Response headers:', response.headers);
+    return response;
+  },
+  (error) => {
+    console.log('Error response headers:', error.response?.headers);
+    return Promise.reject(error);
+  }
+);
+
 // Create a separate instance for image URLs
 const getImageBaseUrl = () => {
   if (window.location.hostname !== 'localhost' && window.location.hostname !== '127.0.0.1') {
