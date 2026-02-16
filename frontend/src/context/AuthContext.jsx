@@ -64,7 +64,12 @@ export function AuthProvider({ children }) {
   };
 
   const logout = async () => {
-    await api.post('/auth/logout');
+    try {
+      await api.post('/auth/logout');
+    } catch (error) {
+      console.error('Logout API call failed:', error);
+      // Continue with local logout even if API call fails
+    }
     setUser(null);
     localStorage.removeItem('user');
     showNotification('Logged out successfully!', 'info');
